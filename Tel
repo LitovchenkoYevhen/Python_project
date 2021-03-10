@@ -11,7 +11,7 @@ class PersonalData(Gender):
     my_dict = dict()
 
     def __init__(self, name, number, gender='male'):
-        super().__init__(name, gender)
+        super().__init__(name, gender)                                       # Делегирование родительского класса Gender ( для определения окончания к имени при вызове setter для смены номера).
         self.__number = number
         PersonalData.my_dict[self.name] = self.__number
         print(f'Контакт {self.name} создан. Номер телефона {self.__number}')
