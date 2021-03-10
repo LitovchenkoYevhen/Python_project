@@ -21,7 +21,7 @@ class PersonalData(Gender):
         n = 0
         for key in sorted(cls.my_dict):
             n += 1
-            print((f'{n}. {key} : {cls.my_dict[key]}').center(240, '#'))
+            print(f'{n}. {key} : {cls.my_dict[key]}')
 
     def __str__(self):
         return f'Номер телефона {self.name} это {self.number}.'
