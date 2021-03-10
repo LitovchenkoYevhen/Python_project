@@ -1,0 +1,53 @@
+class Gender:
+    def __init__(self, name, gender):
+        if name.isalpha():
+            self.name = name
+        else:
+            raise ValueError('Имя должно состоять только из букв.')
+        self.gender = gender
+
+
+class PersonalData(Gender):
+    my_dict = dict()
+
+    def __init__(self, name, number, gender='male'):
+        super().__init__(name, gender)
+        self.__number = number
+        PersonalData.my_dict[self.name] = self.__number
+        print(f'Контакт {self.name} создан. Номер телефона {self.__number}')
+
+    @classmethod
+    def contacts(cls):
+        n = 0
+        for key in sorted(cls.my_dict):
+            n += 1
+            print((f'{n}. {key} : {cls.my_dict[key]}').center(240, '#'))
+
+    def __str__(self):
+        return f'Номер телефона {self.name} это {self.number}.'
+
+    @property
+    def number(self):
+        print('Getter')
+        return self.__number
+
+    @number.setter
+    def number(self, new):
+        if new.isdigit() and len(new) == 10:
+            old = PersonalData.my_dict.get(self.name)
+            PersonalData.my_dict[self.name] = new
+            self.__number = new
+            if self.gender == 'male':
+                print(f'{self.name} сменил номер с {old} на {new}.')
+            elif self.gender == 'female':
+                print(f'{self.name} сменила номер с {old} на {new}.')
+            else:
+                print(f'Номер контакта {self.name} изменен с {old} на {new}.')
+        else:
+            raise ValueError('Номер должен состоять только из 10-ти цифр')
+
+    @number.deleter
+    def number(self):
+        print(f'Контакт {self.name} c номером {self.__number} успешно удален.')
+        del PersonalData.my_dict[self.name]
+        del self.name
