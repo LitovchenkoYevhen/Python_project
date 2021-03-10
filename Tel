@@ -12,7 +12,7 @@ class PersonalData(Gender):
 
     def __init__(self, name, number, gender='male'):
         super().__init__(name, gender)                                       # Делегирование родительского класса Gender ( для определения окончания к имени при вызове setter для смены номера).
-        self.__number = number
+        self.__number = number                                               # Создание приватного атрибута, содержащего номер телефона для доступа только через getter.
         PersonalData.my_dict[self.name] = self.__number
         print(f'Контакт {self.name} создан. Номер телефона {self.__number}')
 
